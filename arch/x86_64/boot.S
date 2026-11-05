@@ -10,3 +10,15 @@ multiboot2_header:
     .short 0 # type of tag (0 for end)
     .short 0 # flags: value is 0 because end tag is mandatory
     .long 8 # end tag size in bytes
+
+.bss 
+    stack_bottom: 
+    .space 1 << 14 # stack size 2^14 bytes (16 KB)
+    stack_top:
+
+.text
+.code32
+.globl _start
+_start:
+    mov esp, stack_top
+    call kernel_main
