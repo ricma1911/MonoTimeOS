@@ -16,13 +16,21 @@ multiboot2_header:
     .space 1 << 14 # stack size 2^14 bytes (16 KB)
     stack_top:
 
+.bss 
+    .space 1 << 12 # PML4
+    .space 1 << 12 # PDPT
+    .space 1 << 12 # PD
+    .space 1 << 12 # PT
+
 .text
 .code32
 .globl _start
 _start:
     mov esp, offset stack_top 
 
-    #TO DO 
+    #TO DO - cpuid check 
+
+    #TO DO - paging
 
     #END
     cli 
