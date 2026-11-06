@@ -1,5 +1,5 @@
 .intel_syntax noprefix
-.section .multiboot
+.section .multiboot, "a"
 .balign 8
 multiboot2_header:
     .long 0xE85250D6 # magic
@@ -20,5 +20,12 @@ multiboot2_header:
 .code32
 .globl _start
 _start:
-    mov esp, stack_top
-    call kernel_main
+    mov esp, offset stack_top 
+
+    #TO DO 
+
+    #END
+    cli 
+    halt:
+        hlt 
+    jmp halt
