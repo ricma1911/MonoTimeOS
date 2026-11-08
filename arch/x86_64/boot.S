@@ -39,8 +39,16 @@ _start:
 
     mov eax, offset pml4
     mov cr3, eax # we need to use eax because cr3 is not a general-purpose register, therefore there is a limited number of allowed operations
-    mov eax, 0x20
-    mov cr4, eax # same reason like cr3
+    mov eax, 0x20 #
+    mov cr4, eax # same reason like cr3, TO REVIEW (because of override)
+
+    mov ecx, 0xC0000080
+    rdmsr
+    or eax, (1 << 8) # LME - Long Mode Enable bit
+    wrmsr
+    mov eax, 1 << 31
+    mov cr0, eax # paging byte in cr0, TO REVIEW (because of override)
+
 
     #END
     cli 
