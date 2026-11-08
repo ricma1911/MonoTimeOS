@@ -33,11 +33,14 @@ _start:
 
     #TO DO - cpuid check 
 
-
-    #TO DO - paging
     mov dword ptr [pml4], offset pdpt + 3 # last bits are for permissions, first bits are for address which is essentially offset pdpt
     mov dword ptr [pdpt], offset pd + 3
     mov dword ptr [pd], 0x83 # 0th 1st and 7th bits are important and they need to be 1
+
+    mov eax, offset pml4
+    mov cr3, eax # we need to use eax because cr3 is not a general-purpose register, therefore there is a limited number of allowed operations
+    mov eax, 0x20
+    mov cr4, eax # same reason like cr3
 
     #END
     cli 
