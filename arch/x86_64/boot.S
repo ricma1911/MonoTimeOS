@@ -17,10 +17,13 @@ multiboot2_header:
     stack_top:
 
 .bss 
+.balign 4096 # 2^12, alignment for paging tables
+pml4:
     .space 1 << 12 # PML4
+pdpt:
     .space 1 << 12 # PDPT
+pd:
     .space 1 << 12 # PD
-    .space 1 << 12 # PT
 
 .text
 .code32
@@ -30,7 +33,11 @@ _start:
 
     #TO DO - cpuid check 
 
+
     #TO DO - paging
+    mov dword ptr [pml4], offset pdpt + 3 # last bits are for permissions, first bits are for address which is essentially offset pdpt
+    mov dword ptr [pdpt], offset pd + 3
+    mov dword ptr [pd], 0x83 # 0th 1st and 7th bits are important and they need to be 1
 
     #END
     cli 
