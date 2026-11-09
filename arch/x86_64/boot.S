@@ -25,6 +25,12 @@ pdpt:
 pd:
     .space 1 << 12 # PD
 
+
+.data 
+gdt: # Global Descriptor Table
+    .quad 0 # null descriptor
+    .quad 0x00B09A0000000000 # code segment descriptor
+
 .text
 .code32
 .globl _start
@@ -48,6 +54,11 @@ _start:
     wrmsr
     mov eax, 1 << 31
     mov cr0, eax # paging byte in cr0, TO REVIEW (because of override)
+
+    mov word ptr [gdtr], 0xE # first two bytes is limit = 16 - 1
+    mov dword ptr [gdtr + 2], offset gdt # four bytes for the address of gdt (Global descriptor table)
+    lgdt [gdtr]
+    .code64
 
 
     #END
