@@ -58,8 +58,11 @@ _start:
     mov word ptr [gdtr], 0xE # first two bytes is limit = 16 - 1
     mov dword ptr [gdtr + 2], offset gdt # four bytes for the address of gdt (Global descriptor table)
     lgdt [gdtr]
-    .code64
 
+    ljmp 0x08, offset long_mode_start #0x08 because that is an offset to the code segment descriptor, offset long_mode_start is an address to the label
+    .code64
+    long_mode_start:
+        call kernel_main
 
     #END
     cli 
