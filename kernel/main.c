@@ -1,6 +1,6 @@
 
 
-int kernel_main(){
+void kernel_main(){
     const char* hw = "Hello, world!";
     int i = 0;
     while (hw[i] != '\0'){
@@ -11,5 +11,4 @@ int kernel_main(){
         );
         i++;
     }
-    return 0;
 }
