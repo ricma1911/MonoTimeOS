@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -ffreestanding -nostdlib -nostartfiles 
 
 kernel.elf: main.o boot.o
-	$(CC) $(CFLAGS) -no-pie -T linker.ld $^ -o kernel.elf
+	$(CC) $(CFLAGS) -Wl,--build-id=none -no-pie -T linker.ld $^ -o kernel.elf
 
 main.o: kernel/main.c
 	$(CC) $(CFLAGS) -fno-pie -c $^ -o main.o
