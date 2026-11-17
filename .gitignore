@@ -1,4 +1,5 @@
 isodir/
+*.log
 *.journal
 *.o
 *.elf
