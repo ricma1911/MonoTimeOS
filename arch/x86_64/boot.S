@@ -31,6 +31,11 @@ gdt: # Global Descriptor Table
     .quad 0 # null descriptor
     .quad 0x00B09A0000000000 # code segment descriptor
 
+.data 
+gdtr:
+    .short 0 # Limit of GDT 
+    .quad 0 # Base address of GDT
+
 .text
 .code32
 .globl _start
