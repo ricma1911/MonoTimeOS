@@ -11,6 +11,12 @@ SECTIONS
     {
         *(.multiboot) /* * is "from every object file" */ /*!!! KEEP to do !!!*/
     } : LOAD_2
+    
+    .text . : 
+    {
+        *(.text)
+    } : LOAD_2
+
     .bss . : /* . is location counter */ /* !!! ALIGN() maybe to do  !!! */
     {
         *(.bss)
@@ -19,9 +25,5 @@ SECTIONS
     {
         *(.data)
     } : LOAD_1
-    .text . : 
-    {
-        *(.text)
-    } : LOAD_2
 
 }
