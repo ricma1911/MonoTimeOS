@@ -58,7 +58,9 @@ _start:
     or eax, (1 << 8) # LME - Long Mode Enable bit
     wrmsr
     mov eax, 1 << 31
-    mov cr0, eax # paging byte in cr0, TO REVIEW (because of override)
+    mov ebx, cr0 # save the old value of cr0 
+    or eax, ebx
+    mov cr0, eax # paging bit in cr0
 
     mov word ptr [gdtr], 0xE # first two bytes is limit = 16 - 1
     mov dword ptr [gdtr + 2], offset gdt # four bytes for the address of gdt (Global descriptor table)
