@@ -26,4 +26,4 @@ boot.o: arch/x86_64/boot.S
 	$(CC) $(CFLAGS) -fno-pie -c $^ -o boot.o
 
 clean:
-	rm -rf *.o *.elf isodir
+	rm -rf *.o *.elf *.log *.iso isodir
