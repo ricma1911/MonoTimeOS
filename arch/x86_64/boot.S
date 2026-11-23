@@ -62,7 +62,7 @@ _start:
     or eax, ebx
     mov cr0, eax # paging bit in cr0
 
-    mov word ptr [gdtr], 0xE # first two bytes is limit = 16 - 1
+    mov word ptr [gdtr], 0x0F # first two bytes is limit = 16 - 1
     mov dword ptr [gdtr + 2], offset gdt # four bytes for the address of gdt (Global descriptor table)
     lgdt [gdtr]
 
