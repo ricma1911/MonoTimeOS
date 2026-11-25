@@ -1,7 +1,7 @@
 #include "vga.h"
 
 void vga_print(const char* string){
-    volatile unsigned short* address = 0xb8000; // address of VGA, the structure is [char][attributes][char][attributes]...
+    volatile unsigned short* address = (unsigned short*)0xb8000; // address of VGA, the structure is [char][attributes][char][attributes]...
     int i = 0;
     while (string[i] != '\0'){
         unsigned short mask = 0;
