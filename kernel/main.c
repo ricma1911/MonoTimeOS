@@ -1,5 +1,4 @@
-
-
+#include <drivers/video/vga.h>
 void kernel_main(){
     const char* hw = "Hello, world!";
     int i = 0;
@@ -11,4 +10,5 @@ void kernel_main(){
         );
         i++;
     }
+    vga_print(hw);
 }

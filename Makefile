@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -ffreestanding -nostdlib -nostartfiles 
+CFLAGS = -Wall -Wextra -I. -ffreestanding -nostdlib -nostartfiles 
 
 iso: copy_grub_cfg
 	grub-mkrescue -o monotimeos.iso isodir
