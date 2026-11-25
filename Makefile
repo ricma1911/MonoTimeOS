@@ -16,11 +16,14 @@ mkdir_boot: mkdir
 mkdir: kernel.elf 
 	mkdir -p isodir
 
-kernel.elf: main.o boot.o
+kernel.elf: main.o boot.o vga.o
 	$(CC) $(CFLAGS) -Wl,--build-id=none -no-pie -T linker.ld $^ -o kernel.elf
 
 main.o: kernel/main.c
-	$(CC) $(CFLAGS) -fno-pie -c $^ -o main.o
+	$(CC) $(CFLAGS) -fno-pie -c $< -o main.o
+
+vga.o: drivers/video/vga.c
+	$(CC) $(CFLAGS) -c $< -o vga.o
 
 boot.o: arch/x86_64/boot.S
 	$(CC) $(CFLAGS) -fno-pie -c $^ -o boot.o
